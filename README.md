@@ -64,20 +64,28 @@ func main() {
         log.Fatal(err)
     }
 }
-
 ```
-Expected Output: A gzipped backup.sql with headers, CREATE TABLE statements, and batched INSERTs (e.g., INSERT INTO users VALUES (...), (...);).For MySQL: Use "mysql" and a DSN like user:pass@tcp(localhost:3306)/mydb.
-For MongoDB: Use "mongodb" and a URI like mongodb://localhost:27017, outputting JSON like {"db.users": [{"_id": "...", "name": "Alice"}]}.See pkg.go.dev/github.com/OffbyteSecure/dump_util for full API docs and godoc examples.CLI UsageThe dumper tool wraps the library for shell scripting:bash
 
-# Basic PostgreSQL dump (compressed)
+Expected Output: A gzipped `backup.sql` with headers, `CREATE TABLE` statements, and batched `INSERT`s (e.g., `INSERT INTO users VALUES (...), (...);`).
+
+For MySQL: Use `"mysql"` and a DSN like `user:pass@tcp(localhost:3306)/mydb`.
+For MongoDB: Use `"mongodb"` and a URI like `mongodb://localhost:27017`, outputting JSON like `{"db.users": [{"_id": "...", "name": "Alice"}]}`.
+
+See [pkg.go.dev/github.com/OffbyteSecure/dump_util](https://pkg.go.dev/github.com/OffbyteSecure/dump_util) for full API docs and `godoc` examples.
+
+### CLI Usage
+
+The `dumper` tool wraps the library for shell scripting:
+
 ```bash
-dumper --type postgres \\
-       --conn "postgres://user:pass@localhost:5432/mydb?sslmode=disable" \\
-       --output backup.sql.gz \\
-       --compress \\
-       --batch-size 10000 \\
-       --workers 8 \\
-       --exclude "temp_table,audit_logs"
+# Basic PostgreSQL dump (compressed)
+dumper --type postgres \
+	--conn "postgres://user:pass@localhost:5432/mydb?sslmode=disable" \
+	--output backup.sql.gz \
+	--compress \
+	--batch-size 10000 \
+	--workers 8 \
+	--exclude "temp_table,audit_logs"
 
 # MySQL example
 dumper --type mysql --conn "user:pass@tcp(localhost:3306)/mydb" --output mysql_backup.sql
@@ -85,18 +93,12 @@ dumper --type mysql --conn "user:pass@tcp(localhost:3306)/mydb" --output mysql_b
 # MongoDB (JSON output)
 dumper --type mongodb --conn "mongodb://localhost:27017" --output mongo_backup.json.gz
 
-```
-Run 
-```bash
-dumper --help for all flags. Logs progress to stdout (e.g., "Dumping table 'users': 10k rows processed").
-```
-Project StructureThis follows the Go Project Layout:/cmd/dumper: CLI entrypoint (Cobra-based).
-```bash
-/internal/drivers: DB-specific implementations (postgres.go, mysql.go, mongodb.go).
-/internal/writer: Output formatters (SQLWriter, JSONWriter).
-/internal/utils: Helpers (pooling, DSN parsing).
-/pkg/dump_util: Public API (BackupOptions, DumpDatabase, interfaces).
-```
 ### Contributing
 
-We welcome bug reports, features, and docs improvements! See CONTRIBUTING.md for details. Run tests with go test ./... and build with go build ./....LicenseMIT License (LICENSE) © 2025 OffbyteSecure. See LICENSE for details.Built with  for efficient DB backups. Questions? Open an issue!
+We welcome bug reports, features, and docs improvements! See `CONTRIBUTING.md` for details. Run tests with `go test ./...` and build with `go build ./...`.
+
+### License
+
+[MIT License](LICENSE) © 2025 OffbyteSecure. See `LICENSE` for details.
+
+Built with 💻 for efficient DB backups. Questions? Open an issue!
