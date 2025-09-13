@@ -92,7 +92,7 @@ dumper --type mysql --conn "user:pass@tcp(localhost:3306)/mydb" --output mysql_b
 
 # MongoDB (JSON output)
 dumper --type mongodb --conn "mongodb://localhost:27017" --output mongo_backup.json.gz
-
+```
 ### Contributing
 
 We welcome bug reports, features, and docs improvements! See `CONTRIBUTING.md` for details. Run tests with `go test ./...` and build with `go build ./...`.
