@@ -8,8 +8,8 @@ import (
 	"sync"
 
 	"github.com/OffbyteSecure/dump_util/internal/drivers"
-	"github.com/OffbyteSecure/dump_util/internal/types"
 	"github.com/OffbyteSecure/dump_util/internal/utils"
+	"github.com/OffbyteSecure/dump_util/pkg/dump_util/types"
 )
 
 // DumpDatabase: Main entrypoint, modular via Dumper and Writer.

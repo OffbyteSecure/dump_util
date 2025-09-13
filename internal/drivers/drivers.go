@@ -9,9 +9,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/OffbyteSecure/dump_util/internal/types"
 	"github.com/OffbyteSecure/dump_util/internal/utils"
 	writerpkg "github.com/OffbyteSecure/dump_util/internal/writer" // Aliased to avoid clash
+	"github.com/OffbyteSecure/dump_util/pkg/dump_util/types"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
